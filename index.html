@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Faltas Disciplinarias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cuestionario Faltas Disciplinarias</h1>
+    <div class="question" id="question"></div>
+    <div>
+        <button onclick="checkAnswer('muy grave')">Muy Grave</button>
+        <button onclick="checkAnswer('grave')">Grave</button>
+        <button onclick="checkAnswer('leve')">Leve</button>
+    </div>
+    <p id="feedback"></p>
+    <p>Puntuación: <span id="score">0</span></p>
+</div>
+
+<script>
+    const questions = [
+        { text: "El abandono del servicio, así como no hacerse cargo de las tareas.", answer: "muy grave" },
+        { text: "La falta de obediencia debida a los superiores.", answer: "grave" },
+        { text: "La falta de asistencia injustificada de un día.", answer: "leve" },
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        document.getElementById('question').innerText = questions[currentQuestion].text;
+    }
+
+    function checkAnswer(answer) {
+        if (answer === questions[currentQuestion].answer) {
+            document.getElementById('feedback').innerText = "Correcto!";
+            score++;
+        } else {
+            document.getElementById('feedback').innerText = "Incorrecto.";
+        }
+        document.getElementById('score').innerText = score;
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('question').innerText = "Cuestionario terminado.";
+        }
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
